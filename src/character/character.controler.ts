@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { CharacterRepository } from './character.repository.js';
 import { Character } from './character.entity.js';
 
-const repository = new CharacterRepository();
+//const repository = new CharacterRepository(); borrar cuando lo cambie
 
 function sanitizeCharacterInput(
   req: Request,
@@ -29,62 +28,23 @@ function sanitizeCharacterInput(
 }
 
 async function findAll(req: Request, res: Response) {
-  res.json({ data: await repository.findAll() });
+  res.status(500).json({ message: 'Not implemented' });
 }
 
 async function findOne(req: Request, res: Response) {
-  const id = req.params.id;
-  const character = await repository.findOne({ id });
-  if (!character) {
-    return res.status(404).send({ message: 'Character not found' });
-  }
-  res.json({ data: character });
+  res.status(500).json({ message: 'Not implemented' });
 }
 
 async function add(req: Request, res: Response) {
-  const input = req.body.sanitizedInput;
-
-  const characterInput = new Character(
-    input.name,
-    input.characterClass,
-    input.level,
-    input.hp,
-    input.mana,
-    input.attack,
-    input.items
-  );
-  const character = await repository.add(characterInput);
-  return res
-    .status(201)
-    .send({ message: 'Character created', data: character });
+  res.status(500).json({ message: 'Not implemented' });
 }
 
 async function update(req: Request, res: Response) {
-  //req.body.sanitizedInput.id = req.params.id;
-  const character = await repository.update(
-    req.params.id,
-    req.body.sanitizedInput
-  );
-
-  if (!character) {
-    return res.status(404).send({ message: 'Character not found' });
-  }
-
-  return res.status(200).send({
-    message: 'Character updated successfully',
-    data: character,
-  });
+  res.status(500).json({ message: 'Not implemented' });
 }
 
 async function remove(req: Request, res: Response) {
-  const id = req.params.id;
-  const character = await repository.delete({ id });
-
-  if (!character) {
-    res.status(404).send({ message: 'Character not found' });
-  } else {
-    res.status(200).send({ message: 'Character deleted successfully' });
-  }
+  res.status(500).json({ message: 'Not implemented' });
 }
 
 export { sanitizeCharacterInput, findAll, findOne, add, update, remove };
