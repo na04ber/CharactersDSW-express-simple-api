@@ -5,6 +5,7 @@ import {
   ManyToMany,
   Collection,
   Cascade,
+  Rel,
 } from '@mikro-orm/core';
 import { BaseEntity } from '../shared/db/baseEntity.entity.js';
 import { CharacterClass } from './characterClass.entity.js';
@@ -16,7 +17,7 @@ export class Character extends BaseEntity {
   name!: string;
 
   @ManyToOne(() => CharacterClass, { nullable: false })
-  characterClass!: CharacterClass;
+  characterClass!: Rel<CharacterClass>;
 
   @Property({ nullable: false })
   level!: number;
